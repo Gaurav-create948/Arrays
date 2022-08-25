@@ -1,0 +1,101 @@
+Minimum Number Of Swaps And K Together
+
+
+
+arr[] = {2, 1, 5, 6, 3} 
+K = 3
+
+We have to return the minimum number of swaps need to do to bring all the numbers less than or equal to k together.
+
+
+So what can be the idea?
+
+So notice if we do swap the number that is apart from the longest subarray which has all the numbers less than or equal to 
+(k) than the numbers of swaps will be less.
+
+
+How can we find the type of longest subarray which has all the numbers less than equal to k and yeah keep in mind should be longer from all.
+
+So we're going to discuss an approach similar to this idea.
+
+Let's see the approach :-
+
+1. Count the total numbers less than or equal to k.
+2. Make a initial window of count size and in that window count      that numbers that are greater than k. So why we count the numbers greater than k because we need to do count of numbers greater than k swaps for this window.
+3 Like this we'll count the minimum number of window and return.
+
+
+
+Let's see by dryrun on few examples :-
+
+arr[] = {7,2,9,5,8,4};
+
+k = 6;
+
+
+1. total numbers less than or equal to k is 3 total = 3.
+
+it means if we bring all elements togther size of that subarray will be {2,5,4} 3.
+
+Now using two loops solve the problem.
+
+int ans = INT_MAX;
+
+for(int i=0; i<=n-count; i++){
+	int temp = 0;
+	for(int j=i; j<i+count; j++){
+		if(arr[j] > k){
+			temp++;  // this means at this subarray we need 					two swaps.
+		}
+	}
+	ans = min(ans, temp);
+}   
+
+
+reuturn ans;
+
+
+
+Time Complexity :- O(N^2);
+Space Complexity :- O(1);
+
+We can use the sliding window technique here that will reduce the time complexity to O(N) and space complexity will be the same.
+
+Efficient solution using sliding window.
+
+int minSwap(int arr[], int n, int k) {
+        // Complet the function
+        int count = 0, total = 0;
+        for(int i=0; i<n; i++){
+            if(arr[i]<=k){
+                total++; // counting the total numbers less than 
+					equal to k.
+            }
+        }
+        
+        for(int i=0; i<total; i++){
+            if(arr[i]>k){
+                count++; // counting in the initial window.
+            }
+        }
+        
+        int i = 0, j = total; // i is at 0 and j is set to 							window end+1
+        int res = count; // intially res is the count if we find 					less than this we'll update in the 						loop.
+        while(j<n){
+            if(arr[i] > k){
+			// if the element we're removing is greater than 			   k it means the count of numbers greater than 
+			   k will reduce for this window. 
+
+                count--;
+            }
+            if(arr[j] > k){
+			// if the element we're adding is greater than 			   	   k it means the count of numbers greater than 			   k will increase for this window. 
+
+                count++;
+            }
+            res = min(res, count); // storing the minimum of 								count.
+            i++; // increasing i
+            j++; // increasing j
+        }
+        return res; // returning res.
+    }
