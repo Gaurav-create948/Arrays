@@ -1,7 +1,5 @@
 Minimum Number Of Swaps And K Together
 
-
-
 arr[] = {2, 1, 5, 6, 3} 
 K = 3
 
@@ -21,8 +19,8 @@ So we're going to discuss an approach similar to this idea.
 Let's see the approach :-
 
 1. Count the total numbers less than or equal to k.
-2. Make a initial window of count size and in that window count      that numbers that are greater than k. So why we count the numbers greater than k because we need to do count of numbers greater than k swaps for this window.
-3 Like this we'll count the minimum number of window and return.
+2. Make a initial window of count size and in that window count that numbers that are greater than k. So why we count the numbers greater than k because we need to do    count of numbers greater than k swaps for this window.
+3. Like this we'll count the minimum number of window and return.
 
 
 
@@ -45,7 +43,7 @@ for(int i=0; i<=n-count; i++){
 	int temp = 0;
 	for(int j=i; j<i+count; j++){
 		if(arr[j] > k){
-			temp++;  // this means at this subarray we need 					two swaps.
+			temp++;  // this means at this subarray we need two swaps.
 		}
 	}
 	ans = min(ans, temp);
@@ -79,21 +77,21 @@ int minSwap(int arr[], int n, int k) {
             }
         }
         
-        int i = 0, j = total; // i is at 0 and j is set to 							window end+1
-        int res = count; // intially res is the count if we find 					less than this we'll update in the 						loop.
+        int i = 0, j = total; // i is at 0 and j is set to window end+1
+        int res = count; // intially res is the count if we find less than this we'll update in the loop.
         while(j<n){
             if(arr[i] > k){
-			// if the element we're removing is greater than 			   k it means the count of numbers greater than 
+			// if the element we're removing is greater than k it means the count of numbers greater than 
 			   k will reduce for this window. 
 
                 count--;
             }
             if(arr[j] > k){
-			// if the element we're adding is greater than 			   	   k it means the count of numbers greater than 			   k will increase for this window. 
+			// if the element we're adding is greater than k it means the count of numbers greater than k will increase for this window. 
 
                 count++;
             }
-            res = min(res, count); // storing the minimum of 								count.
+            res = min(res, count); // storing the minimum of count.
             i++; // increasing i
             j++; // increasing j
         }
